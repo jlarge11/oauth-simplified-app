@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Repos from './components/Repos';
 import CallbackDev from './components/CallbackDev';
+import Error from './components/Error';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="logout" element={<Logout />} />
           <Route path="repos" element={<Repos />} />
           <Route path="callback-dev" element={<CallbackDev />} />
+          <Route path="error" element={<Error />} />
         </Routes>
       </div>
     </Router>
