@@ -6,8 +6,6 @@ const Login = () => {
     const authState = Math.random().toString(36).substring(2);
     sessionStorage.setItem('auth_state', authState);
 
-    const authServerBaseUrl = 'https://github.com/login/oauth/authorize';
-
     const queryParams = queryString.stringify({
         response_type: 'code',
         client_id: process.env.REACT_APP_CLIENT_ID,
@@ -16,7 +14,7 @@ const Login = () => {
         state: authState,
     });
 
-    window.location.href = `${authServerBaseUrl}?${queryParams}`;
+    window.location.href = `${process.env.REACT_APP_AUTHORIZE_URL}?${queryParams}`;
   }, []);
 
   return (
