@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -10,8 +10,6 @@ const useQuery = () => {
 const CallbackDev = () => {
   const navigate = useNavigate();
   const query = useQuery();
-  const [authCode, setAuthCode] = useState(null);
-  const [tokenResponse, setTokenResponse] = useState(null);
   const hasFetchedToken = useRef(false);
 
   useEffect(() => {
@@ -40,14 +38,12 @@ const CallbackDev = () => {
       }
 
       const authCode = query.get('code');
-      setAuthCode(authCode);
 
       getAccessToken(authCode)
         .then(({ data }) => {
           const parsedData = queryString.parse(data);
-          setTokenResponse(parsedData['access_token']);
-
-          // sessionStorage.setItem('accessToken', data.accessToken);
+          sessionStorage.setItem('accessToken', parsedData['access_token']);
+          navigate('/');
         })
         .catch(() => navigate('/error'));
     }
@@ -55,9 +51,7 @@ const CallbackDev = () => {
 
   return (
     <div>
-      <h1>Callback Dev Page</h1>
-      <p>Auth Code: {authCode}</p>
-      <p>Token Response: {tokenResponse}</p>
+      <h1>Getting an access token...</h1>
     </div>
   );
 };
