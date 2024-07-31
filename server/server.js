@@ -11,7 +11,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/login/oauth/access_token', async ({ body, headers }, res) => {
+app.post('/login/oauth/access_token', async ({ body }, res) => {
   let tokenResponse;
 
   try {
