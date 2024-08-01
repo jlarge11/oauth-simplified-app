@@ -3,6 +3,11 @@ import React, { useState, useEffect } from 'react';
 const Home = () => {
   const [accessToken, setAccessToken] = useState(null);
 
+  const handleLogout = () => {
+    setAccessToken(null);
+    sessionStorage.removeItem('accessToken');
+  };
+
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken');
 
@@ -16,8 +21,8 @@ const Home = () => {
       <h1>Home Page</h1>
        {accessToken ? (
           <div>
-            <div>Access Token: {accessToken}</div>
-            <div><a href="/logout">Logout</a></div>
+            <div><a href="/repos">Repos</a></div>
+            <div><a href="/" onClick={handleLogout}>Logout</a></div>
           </div>
         ) : (
           <div><a href="/login">Login</a></div>
